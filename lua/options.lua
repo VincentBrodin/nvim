@@ -11,7 +11,7 @@ set.shiftwidth = 4
 set.number = true
 set.relativenumber = true
 set.wrap = false
-set.shell = "powershell.exe"
+set.shell = "bash"
 
 local api = vim.api
 
@@ -20,7 +20,7 @@ function RemoveBg()
 	api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
 end
 
-RemoveBg()
+-- RemoveBg()
 
 local nvimTree = require "nvim-tree"
 
@@ -50,7 +50,7 @@ nvimTree.setup {
 			},
 		},
 		add_trailing = true,
-		indent_width = 4,
+		indent_width = 2,
 		hidden_display = "all",
 	},
 	sort = {
@@ -59,5 +59,8 @@ nvimTree.setup {
 	view = {
 		number = true,
 		relativenumber = true,
+	},
+	filters = {
+		git_ignored = false,
 	},
 }

@@ -27,6 +27,52 @@ return {
 		},
 	},
 	{
+		"nvim-lua/plenary.nvim",
+	},
+	{
+		"ThePrimeagen/harpoon",
+		config = function()
+			require "harpoon"
+		end,
+		keys = {
+			{
+				"<leader>aa",
+				function()
+					local ui = require "harpoon.ui"
+					ui.toggle_quick_menu()
+				end,
+			},
+			{
+				"<leader>af",
+				function()
+					local mark = require "harpoon.mark"
+					mark.toggle_quick_add_file()
+				end,
+			},
+			{
+				"<leader>a1",
+				function()
+					local ui = require "harpoon.ui"
+					ui.nav_file(1)
+				end,
+			},
+			{
+				"<leader>a2",
+				function()
+					local ui = require "harpoon.ui"
+					ui.nav_file(2)
+				end,
+			},
+			{
+				"<leader>a3",
+				function()
+					local ui = require "harpoon.ui"
+					ui.nav_file(3)
+				end,
+			},
+		},
+	},
+	{
 		"toppair/peek.nvim",
 		build = "deno task --quiet build:fast",
 		keys = {
