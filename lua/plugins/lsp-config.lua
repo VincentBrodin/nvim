@@ -9,7 +9,12 @@ return {
 		"williamboman/mason-lspconfig.nvim",
 		config = function()
 			require("mason-lspconfig").setup({
-				ensure_installed = { "lua_ls", "omnisharp", "zls" },
+				ensure_installed = {
+					"lua_ls",
+					"omnisharp",
+					"zls",
+					"rust_analyzer",
+				},
 			})
 		end,
 	},
@@ -26,6 +31,23 @@ return {
 			--Zig
 			lspconfig.zls.setup({
 				capabilities = capabilities,
+			})
+			--Rust
+			lspconfig.rust_analyzer.setup({
+				capabilities = capabilities,
+				settings = {
+					["rust-analyzer"] = {
+						cargo = {
+							allFeatures = true,
+						},
+						diagnostics = {
+							enable = true,
+						},
+						flags = {
+							debounce_text_changes = 150,
+						},
+					},
+				},
 			})
 			--C#
 			lspconfig.omnisharp.setup({
