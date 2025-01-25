@@ -14,7 +14,6 @@ return {
 					"omnisharp",
 					"zls",
 					"rust_analyzer",
-					"stylua"
 				},
 			})
 		end,
@@ -78,7 +77,6 @@ return {
 
 			vim.api.nvim_create_autocmd("LspAttach", {
 				callback = function(ev)
-
 					local notify = require("notify")
 					notify("LSP attached to buffer " .. ev.buf, "info", {
 						title = "LSP Notification",
