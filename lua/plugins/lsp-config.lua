@@ -14,6 +14,7 @@ return {
 					"omnisharp",
 					"zls",
 					"rust_analyzer",
+					"styelua"
 				},
 			})
 		end,

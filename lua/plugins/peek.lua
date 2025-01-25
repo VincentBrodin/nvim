@@ -3,8 +3,11 @@ return {
 	event = { "VeryLazy" },
 	build = "deno task --quiet build:fast",
 	config = function()
-		require("peek").setup()
-		vim.api.nvim_create_user_command("PeekOpen", require("peek").open, {})
-		vim.api.nvim_create_user_command("PeekClose", require("peek").close, {})
+		local peek = require("peek")
+		peek.setup()
+		vim.api.nvim_create_user_command("PeekOpen", peek.open, {})
+		vim.api.nvim_create_user_command("PeekClose", peek.close, {})
+		-- Peek
+		vim.keymap.set("n", "<leader>md", peek.open)
 	end,
 }

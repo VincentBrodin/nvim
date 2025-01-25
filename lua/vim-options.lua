@@ -18,3 +18,6 @@ vim.cmd("nmap <silent> <c-l> :wincmd l<CR>")
 -- Stops code from moving right when an error is shown
 vim.o.signcolumn = "yes"
 -- This hides those ~ from a line thats missing
+
+
+
