@@ -14,6 +14,7 @@ return {
 					"omnisharp",
 					"zls",
 					"rust_analyzer",
+					"gopls",
 				},
 			})
 		end,
@@ -32,6 +33,8 @@ return {
 			lspconfig.zls.setup({
 				capabilities = capabilities,
 			})
+			--GO
+			require("lspconfig").gopls.setup({})
 			--Rust
 			lspconfig.rust_analyzer.setup({
 				capabilities = capabilities,
