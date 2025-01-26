@@ -15,6 +15,7 @@ return {
 					"zls",
 					"rust_analyzer",
 					"gopls",
+					"ts_ls",
 				},
 			})
 		end,
@@ -34,7 +35,13 @@ return {
 				capabilities = capabilities,
 			})
 			--GO
-			require("lspconfig").gopls.setup({})
+			lspconfig.gopls.setup({
+				capabilities = capabilities,
+			})
+			--JavaScript/TypeScript
+			lspconfig.ts_ls.setup({
+				capabilities = capabilities,
+			})
 			--Rust
 			lspconfig.rust_analyzer.setup({
 				capabilities = capabilities,
@@ -92,7 +99,7 @@ return {
 					vim.keymap.set("n", "gD", buf.declaration, opts)
 					vim.keymap.set("n", "gd", buf.definition, opts)
 					vim.keymap.set({ "n", "v" }, "<leader>ca", buf.code_action, opts)
-					vim.keymap.set("n", "<leader>fm", function()
+					vim.keymap.set({ "n", "v" }, "<C-e><C-d>", function()
 						buf.format({ async = true })
 					end, opts)
 				end,
