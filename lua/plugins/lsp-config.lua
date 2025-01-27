@@ -16,6 +16,8 @@ return {
 					"rust_analyzer",
 					"gopls",
 					"ts_ls",
+					"html",
+					"tailwindcss",
 				},
 			})
 		end,
@@ -40,6 +42,14 @@ return {
 			})
 			--JavaScript/TypeScript
 			lspconfig.ts_ls.setup({
+				capabilities = capabilities,
+			})
+			--Html
+			lspconfig.html.setup({
+				capabilities = capabilities,
+			})
+			--CSS & Tailwind
+			lspconfig.tailwindcss.setup({
 				capabilities = capabilities,
 			})
 			--Rust
