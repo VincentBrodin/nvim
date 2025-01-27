@@ -7,6 +7,7 @@ opt.relativenumber = true
 opt.shiftwidth = 4
 opt.tabstop = 4
 opt.clipboard = "unnamedplus"
+-- This hides those ~ from a line thats missing
 opt.fillchars = { eob = " " }
 
 --Navigate splits
@@ -17,7 +18,6 @@ vim.cmd("nmap <silent> <c-l> :wincmd l<CR>")
 
 -- Stops code from moving right when an error is shown
 vim.o.signcolumn = "yes"
--- This hides those ~ from a line thats missing
 
-
-
+-- Makes it so that :W will save and not give that anoying error
+vim.api.nvim_create_user_command('W', 'w', {})
