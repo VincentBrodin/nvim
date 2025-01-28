@@ -21,3 +21,4 @@ vim.o.signcolumn = "yes"
 
 -- Makes it so that :W will save and not give that anoying error
 vim.api.nvim_create_user_command('W', 'w', {})
+vim.api.nvim_create_user_command('Q', 'q', {})
