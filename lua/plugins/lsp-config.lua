@@ -18,6 +18,7 @@ return {
 					"ts_ls",
 					"html",
 					"tailwindcss",
+					"clangd",
 				},
 			})
 		end,
@@ -50,6 +51,10 @@ return {
 			})
 			--CSS & Tailwind
 			lspconfig.tailwindcss.setup({
+				capabilities = capabilities,
+			})
+			--C
+			lspconfig.clangd.setup({
 				capabilities = capabilities,
 			})
 			--Rust
