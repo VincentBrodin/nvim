@@ -5,7 +5,7 @@ return {
 		local configs = require("nvim-treesitter.configs")
 		local install = require("nvim-treesitter.install")
 		install.prefer_git = false
-		install.compilers = { "zig", "gcc" }
+		install.compilers = { "zig", "clang" }
 
 		configs.setup({
 			ensure_installed = { "lua" },

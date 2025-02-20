@@ -1,9 +1,17 @@
 return {
 	{
+		"folke/tokyonight.nvim",
+		name = "tokyonight",
+		config = function()
+			vim.cmd("colorscheme tokyonight")
+		end,
+	},
+
+	{
 		"Mofiqul/dracula.nvim",
 		name = "dracula",
 		config = function()
-			vim.cmd("colorscheme dracula")
+			-- vim.cmd("colorscheme dracula")
 		end,
 	},
 	{

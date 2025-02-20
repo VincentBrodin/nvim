@@ -9,6 +9,7 @@ opt.tabstop = 4
 opt.clipboard = "unnamedplus"
 -- This hides those ~ from a line thats missing
 opt.fillchars = { eob = " " }
+opt.wrap = false
 
 --Navigate splits
 vim.cmd("nmap <silent> <c-k> :wincmd k<CR>")
@@ -20,5 +21,6 @@ vim.cmd("nmap <silent> <c-l> :wincmd l<CR>")
 vim.o.signcolumn = "yes"
 
 -- Makes it so that :W will save and not give that anoying error
-vim.api.nvim_create_user_command('W', 'w', {})
-vim.api.nvim_create_user_command('Q', 'q', {})
+local api = vim.api
+api.nvim_create_user_command('W', 'w', {})
+api.nvim_create_user_command('Q', 'q', {})
