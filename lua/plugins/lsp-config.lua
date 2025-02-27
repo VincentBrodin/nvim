@@ -17,6 +17,7 @@ return {
 					"gopls",
 					"ts_ls",
 					"html",
+					"cssls",
 					"tailwindcss",
 					"clangd",
 				},
@@ -48,8 +49,22 @@ return {
 			--Html
 			lspconfig.html.setup({
 				capabilities = capabilities,
+				filetypes = { "html", "templ", "hbs", "handlebars", "razor", "cshtml" },
+				init_options = {
+					configurationSection = { "html", "hbs", "handlebars", "css", "javascript" },
+					embeddedLanguages = {
+						css = true,
+						javascript = true,
+					},
+					provideFormatter = true,
+				},
 			})
-			--CSS & Tailwind
+			--Css
+			lspconfig.cssls.setup({
+				capabilities = capabilities,
+
+			})
+			--Tailwind
 			lspconfig.tailwindcss.setup({
 				capabilities = capabilities,
 			})
@@ -108,6 +123,7 @@ return {
 					vim.keymap.set("n", "K", buf.hover, opts)
 					vim.keymap.set("n", "gD", buf.declaration, opts)
 					vim.keymap.set("n", "gd", buf.definition, opts)
+					vim.keymap.set({ "n", "v" }, "<C-r><C-r>", buf.rename, opts)
 					vim.keymap.set({ "n", "v" }, "<leader>ca", buf.code_action, opts)
 					vim.keymap.set({ "n", "v" }, "<C-e><C-d>", function()
 						buf.format({ async = true })

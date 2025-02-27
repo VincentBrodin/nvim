@@ -4,6 +4,7 @@ return {
 	config = function()
 		local configs = require("nvim-treesitter.configs")
 		local install = require("nvim-treesitter.install")
+		local treesitter = vim.treesitter
 		install.prefer_git = false
 		install.compilers = { "zig", "clang" }
 
@@ -14,5 +15,7 @@ return {
 			highlight = { enable = true },
 			indent = { enable = true },
 		})
+
+		treesitter.language.register("html", "hbs")
 	end,
 }

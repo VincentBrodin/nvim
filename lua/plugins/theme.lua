@@ -1,9 +1,24 @@
 return {
 	{
+		"zenbones-theme/zenbones.nvim",
+		name = "zenbones",
+		dependencies = "rktjmp/lush.nvim",
+		config = function()
+			vim.cmd("colorscheme zenbones")
+		end,
+	},
+	{
+		"nyoom-engineering/oxocarbon.nvim",
+		name = "oxocarbon",
+		config = function()
+			-- vim.cmd("colorscheme oxocarbon")
+		end,
+	},
+	{
 		"folke/tokyonight.nvim",
 		name = "tokyonight",
 		config = function()
-			vim.cmd("colorscheme tokyonight")
+			-- vim.cmd("colorscheme tokyonight")
 		end,
 	},
 
