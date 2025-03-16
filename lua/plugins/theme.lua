@@ -1,10 +1,11 @@
 return {
 	{
 		"zenbones-theme/zenbones.nvim",
-		name = "zenbones",
 		dependencies = "rktjmp/lush.nvim",
 		config = function()
-			vim.cmd("colorscheme zenbones")
+			vim.cmd("set termguicolors")
+			vim.cmd("set background=dark")
+			vim.cmd("colorscheme gruvbones")
 		end,
 	},
 	{

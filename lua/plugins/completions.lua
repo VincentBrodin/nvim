@@ -16,8 +16,10 @@ return {
 			local cmp = require("cmp")
 			require("luasnip.loaders.from_vscode").lazy_load()
 			--Snippets in hbs
-			require("luasnip").filetype_extend("handlebars", { "html" })
-			require("luasnip").filetype_extend("hbs", { "html" })
+			local luasnip = require("luasnip")
+			luasnip.filetype_extend("handlebars", { "html" })
+			luasnip.filetype_extend("hbs", { "html" })
+			luasnip.filetype_extend("vue", { "html" })
 
 			cmp.setup({
 				snippet = {

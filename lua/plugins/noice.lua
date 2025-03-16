@@ -24,8 +24,11 @@ return {
 			},
 		})
 
+		local normal_bg = vim.api.nvim_get_hl_by_name("Normal", true).background
+		local normal_bg_hex = normal_bg and string.format("#%06x", normal_bg) or "#000000"
 		require("notify").setup({
-				top_down = false,
+			background_colour = normal_bg_hex,
+			top_down = false,
 		})
 
 		local stages_util = require("notify.stages.util")

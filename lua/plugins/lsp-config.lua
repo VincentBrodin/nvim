@@ -20,6 +20,8 @@ return {
 					"cssls",
 					"tailwindcss",
 					"clangd",
+					"volar",
+					-- "vuels",
 				},
 			})
 		end,
@@ -42,16 +44,30 @@ return {
 			lspconfig.gopls.setup({
 				capabilities = capabilities,
 			})
-			--JavaScript/TypeScript
+			--Vue, Js & Ts
+			local mason_registry = require("mason-registry")
+			local vue_language_server = mason_registry.get_package("vue-language-server"):get_install_path()
+				.. "/node_modules/@vue/language-server"
+
 			lspconfig.ts_ls.setup({
 				capabilities = capabilities,
+				init_options = {
+					plugins = {
+						{
+							name = "@vue/typescript-plugin",
+							location = vue_language_server,
+							languages = { "vue" },
+						},
+					},
+				},
+				filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
 			})
 			--Html
 			lspconfig.html.setup({
 				capabilities = capabilities,
-				filetypes = { "html", "templ", "hbs", "handlebars", "razor", "cshtml" },
+				filetypes = { "html", "templ", "hbs", "handlebars", "razor", "cshtml", "vue" },
 				init_options = {
-					configurationSection = { "html", "hbs", "handlebars", "css", "javascript" },
+					configurationSection = { "html", "hbs", "handlebars", "css", "javascript", "vue" },
 					embeddedLanguages = {
 						css = true,
 						javascript = true,
@@ -62,7 +78,6 @@ return {
 			--Css
 			lspconfig.cssls.setup({
 				capabilities = capabilities,
-
 			})
 			--Tailwind
 			lspconfig.tailwindcss.setup({
