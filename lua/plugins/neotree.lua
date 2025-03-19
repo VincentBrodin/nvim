@@ -28,7 +28,7 @@ return {
 				},
 			},
 		})
-		vim.cmd(":Neotree focus filesystem reveal_force_cwd right")
-		vim.keymap.set("n", "<C-n>", ":Neotree focus filesystem reveal_force_cwd right<CR>", {})
+		-- vim.cmd(":Neotree focus filesystem reveal_force_cwd right")
+		vim.keymap.set("n", "<C-n>", "<CMD>Neotree toggle filesystem reveal_force_cwd right<CR>", {})
 	end,
 }

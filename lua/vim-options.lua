@@ -22,5 +22,7 @@ vim.o.signcolumn = "yes"
 
 -- Makes it so that :W will save and not give that anoying error
 local api = vim.api
-api.nvim_create_user_command('W', 'w', {})
-api.nvim_create_user_command('Q', 'q', {})
+api.nvim_create_user_command("W", "w", {})
+api.nvim_create_user_command("Q", "q", {})
+
+vim.keymap.set("n", "<Leader>h", "<CMD>noh<CR>", {})
