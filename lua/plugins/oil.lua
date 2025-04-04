@@ -54,7 +54,7 @@ return {
 			-- Set to `false` to disable, or "name" to keep it on the file names
 			constrain_cursor = "editable",
 			-- Set to true to watch the filesystem for changes and reload oil
-			watch_for_changes = false,
+			watch_for_changes = true,
 			-- Keymaps in oil buffer. Can be any value that `vim.keymap.set` accepts OR a table of keymap
 			-- options with a `callback` (e.g. { callback = function() ... end, desc = "", mode = "n" })
 			-- Additionally, if it is a string that matches "actions.<name>",
@@ -66,7 +66,7 @@ return {
 				["<CR>"] = "actions.select",
 				["<C-s>"] = { "actions.select", opts = { vertical = true } },
 				["<C-h>"] = { "actions.select", opts = { horizontal = true } },
-				["<C-t>"] = { "actions.select", opts = { tab = true } },
+				["<C-y>"] = { "actions.select", opts = { tab = true } },
 				["<C-p>"] = "actions.preview",
 				["<C-c>"] = { "actions.close", mode = "n" },
 				["<C-l>"] = "actions.refresh",
@@ -83,7 +83,7 @@ return {
 			use_default_keymaps = true,
 			view_options = {
 				-- Show files and directories that start with "."
-				show_hidden = false,
+				show_hidden = true,
 				-- This function defines what is considered a "hidden" file
 				is_hidden_file = function(name, bufnr)
 					local m = name:match("^%.")
