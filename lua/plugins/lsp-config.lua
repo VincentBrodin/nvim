@@ -21,7 +21,8 @@ return {
 					"tailwindcss",
 					"clangd",
 					"volar",
-					-- "vuels",
+					"svelte",
+					"graphql",
 				},
 			})
 		end,
@@ -42,6 +43,10 @@ return {
 			})
 			--GO
 			lspconfig.gopls.setup({
+				capabilities = capabilities,
+			})
+			--
+			lspconfig.svelte.setup({
 				capabilities = capabilities,
 			})
 			--Vue, Js & Ts
@@ -128,6 +133,11 @@ return {
 						IncludePrereleases = true,
 					},
 				},
+			})
+			-- GraphQl
+			lspconfig.graphql.setup({
+				capabilities = capabilities,
+				filetypes = { "graphql", "graphqls", "typescriptreact", "javascriptreact" },
 			})
 
 			vim.api.nvim_create_autocmd("LspAttach", {

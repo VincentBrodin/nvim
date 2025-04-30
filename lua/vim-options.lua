@@ -29,3 +29,6 @@ vim.keymap.set("n", "<Leader>h", "<CMD>noh<CR>", {})
 vim.keymap.set("n", "<C-y>", "<CMD>redo<CR>", {})
 
 vim.cmd("set termguicolors")
+
+
+vim.cmd("set bg=dark")
