@@ -23,6 +23,7 @@ return {
 			"kanagawabones",
 			"miasma",
 			"everforest",
+			"gruvbones"
 		}
 
 		local themery_themes = {}

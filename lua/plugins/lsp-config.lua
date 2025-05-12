@@ -2,7 +2,12 @@ return {
 	{
 		"williamboman/mason.nvim",
 		config = function()
-			require("mason").setup()
+			require("mason").setup({
+				registries = {
+					"github:mason-org/mason-registry",
+					"github:Crashdummyy/mason-registry",
+				},
+			})
 		end,
 	},
 	{
@@ -11,7 +16,6 @@ return {
 			require("mason-lspconfig").setup({
 				ensure_installed = {
 					"lua_ls",
-					"omnisharp",
 					"zls",
 					"rust_analyzer",
 					"gopls",
@@ -109,35 +113,14 @@ return {
 					},
 				},
 			})
-			--C#
-			lspconfig.omnisharp.setup({
-				capabilities = capabilities,
-				cmd = {
-					"dotnet",
-					"C:/Users/vince/AppData/Local/nvim-data/mason/packages/omnisharp/libexec/OmniSharp.dll",
-				},
-				settings = {
-					FormattingOptions = {
-						EnableEditorConfigSupport = false,
-						OrganizeImports = true,
-					},
-					MsBuild = {
-						LoadProjectsOnDemand = nil,
-					},
-					RoslynExtensionsOptions = {
-						EnableAnalyzersSupport = nil,
-						EnableImportCompletion = nil,
-						AnalyzeOpenDocumentsOnly = nil,
-					},
-					Sdk = {
-						IncludePrereleases = true,
-					},
-				},
-			})
 			-- GraphQl
 			lspconfig.graphql.setup({
 				capabilities = capabilities,
 				filetypes = { "graphql", "graphqls", "typescriptreact", "javascriptreact" },
+			})
+			-- C#
+			lspconfig.roslyn.setup({
+				capabilities = capabilities
 			})
 
 			vim.api.nvim_create_autocmd("LspAttach", {
