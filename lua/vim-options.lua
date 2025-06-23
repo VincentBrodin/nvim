@@ -26,6 +26,7 @@ api.nvim_create_user_command("W", "w", {})
 api.nvim_create_user_command("Q", "q", {})
 
 vim.keymap.set("n", "<Leader>h", "<CMD>noh<CR>", {})
+vim.keymap.set("n", "<Leader>rl", "<CMD>LspRestart<CR>", {})
 vim.keymap.set("n", "<C-y>", "<CMD>redo<CR>", {})
 
 vim.cmd("set termguicolors")

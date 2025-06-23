@@ -19,6 +19,8 @@ return {
 			local luasnip = require("luasnip")
 			luasnip.filetype_extend("handlebars", { "html" })
 			luasnip.filetype_extend("hbs", { "html" })
+			luasnip.filetype_extend("cshtml", { "html" })
+			luasnip.filetype_extend("razor", { "html" })
 			luasnip.filetype_extend("vue", { "html" })
 
 			cmp.setup({

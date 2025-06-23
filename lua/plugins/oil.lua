@@ -86,12 +86,12 @@ return {
 				show_hidden = true,
 				-- This function defines what is considered a "hidden" file
 				is_hidden_file = function(name, bufnr)
+					-- hide dotfiles
 					local m = name:match("^%.")
 					return m ~= nil
-				end,
-				-- This function defines what will never be shown, even when `show_hidden` is set
+				end, -- This function defines what will never be shown, even when `show_hidden` is set
 				is_always_hidden = function(name, bufnr)
-					return false
+					return name:find("__virtual") ~= nil
 				end,
 				-- Sort file names with numbers in a more intuitive order for humans.
 				-- Can be "fast", true, or false. "fast" will turn it off for large directories.

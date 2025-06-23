@@ -26,6 +26,10 @@ return {
 						require("telescope.themes").get_dropdown({}),
 					},
 				},
+				defaults = {
+					file_ignore_patterns = { "%__virtual.cs$" },
+				},
+
 			})
 			require("telescope").load_extension("ui-select")
 		end,

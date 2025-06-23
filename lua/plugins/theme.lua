@@ -1,8 +1,85 @@
 return {
+	{
+		"sam4llis/nvim-tundra",
+		priority = 1000,
+		config = function()
+			require('nvim-tundra').setup({
+				transparent_background = false,
+				dim_inactive_windows = {
+					enabled = false,
+					color = nil,
+				},
+				sidebars = {
+					enabled = true,
+					color = nil,
+				},
+				editor = {
+					search = {},
+					substitute = {},
+				},
+				syntax = {
+					booleans = { bold = true, italic = true },
+					comments = { bold = true, italic = true },
+					conditionals = {},
+					constants = { bold = true },
+					fields = {},
+					functions = {},
+					keywords = {},
+					loops = {},
+					numbers = { bold = true },
+					operators = { bold = true },
+					punctuation = {},
+					strings = {},
+					types = { italic = true },
+				},
+				diagnostics = {
+					errors = {},
+					warnings = {},
+					information = {},
+					hints = {},
+				},
+				plugins = {
+					lsp = true,
+					semantic_tokens = true,
+					treesitter = true,
+					telescope = true,
+					nvimtree = true,
+					cmp = true,
+					context = true,
+					dbui = true,
+					gitsigns = true,
+					neogit = true,
+					textfsm = true,
+				},
+				overwrite = {
+					colors = {},
+					highlights = {},
+				},
+			})
 
-	{ "ellisonleao/gruvbox.nvim", priority = 1000,  config = true, opts = ... },
+			vim.g.tundra_biome = 'arctic' -- 'arctic' or 'jungle'
+			vim.opt.background = 'dark'
+		end
+	},
+
+	{
+		"dgox16/oldworld.nvim",
+		priority = 1000,
+	},
+	{
+		"catppuccin/nvim",
+		name = "catppuccin",
+		priority = 1000,
+		config = function()
+			require("catppuccin").setup({
+				flavour = "mocha", -- latte, frappe, macchiato, mocha
+			})
+		end
+	},
+	{ "ellisonleao/gruvbox.nvim", priority = 1000, config = true, opts = ... },
 	{
 		"sainnhe/everforest",
+		priority = 1000,
 	},
 	{
 		"xero/miasma.nvim",
@@ -11,6 +88,7 @@ return {
 	},
 	{
 		"ribru17/bamboo.nvim",
+		priority = 1000,
 		config = function()
 			require("bamboo").setup({
 				-- Main options --
@@ -59,23 +137,31 @@ return {
 	},
 	{
 		"thallada/farout.nvim",
+		priority = 1000,
 	},
-	{ "savq/melange-nvim" },
+	{
+		"savq/melange-nvim",
+		priority = 1000,
+	},
 	{
 		"zenbones-theme/zenbones.nvim",
 		dependencies = "rktjmp/lush.nvim",
+		priority = 1000,
 	},
 	{
 		"folke/tokyonight.nvim",
 		name = "tokyonight",
+		priority = 1000,
 	},
 
 	{
 		"Mofiqul/dracula.nvim",
 		name = "dracula",
+		priority = 1000,
 	},
 	{
 		"rose-pine/neovim",
 		name = "rose-pine",
+		priority = 1000,
 	},
 }

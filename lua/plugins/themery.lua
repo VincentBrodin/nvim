@@ -23,7 +23,10 @@ return {
 			"kanagawabones",
 			"miasma",
 			"everforest",
-			"gruvbones"
+			"gruvbones",
+			"catppuccin",
+			"oldworld",
+			"tundra"
 		}
 
 		local themery_themes = {}
