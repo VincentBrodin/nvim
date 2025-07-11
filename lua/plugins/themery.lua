@@ -26,7 +26,9 @@ return {
 			"gruvbones",
 			"catppuccin",
 			"oldworld",
-			"tundra"
+			"tundra",
+			"oxocarbon",
+			"onedark"
 		}
 
 		local themery_themes = {}

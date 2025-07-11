@@ -1,5 +1,17 @@
 return {
 	{
+		"navarasu/onedark.nvim",
+		priority = 1000,
+		config = function()
+			require('onedark').setup {
+				style = 'darker'
+			}
+		end
+	},
+	{
+		"nyoom-engineering/oxocarbon.nvim",
+	},
+	{
 		"sam4llis/nvim-tundra",
 		priority = 1000,
 		config = function()

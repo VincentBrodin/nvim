@@ -28,7 +28,8 @@ return {
 					"svelte",
 					"graphql",
 					"emmet_ls",
-					"pylsp"
+					"pylsp",
+					"jsonls"
 				},
 			})
 		end,
@@ -145,6 +146,10 @@ return {
 			})
 			-- Python
 			lspconfig.pylsp.setup({
+				capabilities = capabilities,
+			})
+			-- Json
+			lspconfig.jsonls.setup({
 				capabilities = capabilities,
 			})
 			-- C#
