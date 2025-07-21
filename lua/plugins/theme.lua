@@ -1,5 +1,89 @@
 return {
 	{
+		"EdenEast/nightfox.nvim",
+		config = function()
+			require('nightfox').setup({
+				options = {
+					styles = {
+						comments = "italic",
+						keywords = "bold",
+						types = "italic,bold",
+					}
+				}
+			})
+		end
+	},
+	{
+		"rakr/vim-one"
+	},
+	{
+		"thesimonho/kanagawa-paper.nvim",
+		lazy = false,
+		priority = 1000,
+		opts = {},
+		config = function()
+			require("kanagawa-paper").setup({
+				undercurl = true,
+				transparent = false,
+				gutter = false,
+				diag_background = true,
+				dim_inactive = false,
+				terminal_colors = true,
+				cache = false,
+
+				styles = {
+					comment = { italic = true },
+					functions = { italic = false },
+					keyword = { italic = false, bold = true },
+					-- style for statements
+					statement = { italic = false, bold = false },
+					-- style for types
+					type = { italic = true },
+				},
+				-- override default palette and theme colors
+				colors = {
+					palette = {},
+					theme = {
+						ink = {},
+						canvas = {},
+					},
+				},
+				-- adjust overall color balance for each theme [-1, 1]
+				color_offset = {
+					ink = { brightness = 0, saturation = 0 },
+					canvas = { brightness = 0, saturation = 0 },
+				},
+				-- override highlight groups
+				overrides = function(colors)
+					return {}
+				end,
+
+				-- uses lazy.nvim, if installed, to automatically enable needed plugins
+				auto_plugins = true,
+				-- enable highlights for all plugins (disabled if using lazy.nvim)
+				all_plugins = package.loaded.lazy == nil,
+				-- manually enable/disable individual plugins.
+				-- check the `groups/plugins` directory for the exact names
+				plugins = {
+					-- examples:
+					-- rainbow_delimiters = true
+					-- which_key = false
+				},
+
+				-- enable integrations with other applications
+				integrations = {
+					-- automatically set wezterm theme to match the current neovim theme
+					wezterm = {
+						enabled = false,
+						-- neovim will write the theme name to this file
+						-- wezterm will read from this file to know which theme to use
+						path = (os.getenv("TEMP") or "/tmp") .. "/nvim-theme",
+					},
+				},
+			})
+		end
+	},
+	{
 		"navarasu/onedark.nvim",
 		priority = 1000,
 		config = function()

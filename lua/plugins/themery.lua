@@ -23,12 +23,18 @@ return {
 			"kanagawabones",
 			"miasma",
 			"everforest",
-			"gruvbones",
 			"catppuccin",
 			"oldworld",
 			"tundra",
 			"oxocarbon",
-			"onedark"
+			"onedark",
+			"kanagawa-paper-ink",
+			"one",
+			"nightfox",
+			"duskfox",
+			"nordfox",
+			"terafox",
+			"carbonfox",
 		}
 
 		local themery_themes = {}

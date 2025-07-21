@@ -56,6 +56,18 @@ return {
 			--GO
 			lspconfig.gopls.setup({
 				capabilities = capabilities,
+				settings = {
+					gopls = {
+						buildFlags = { "-tags=integration" },
+						usePlaceholders = true,
+						completeUnimported = true,
+						staticcheck = true,
+						gofumpt = true,
+						analyses = {
+							unusedparams = true,
+						},
+					},
+				},
 			})
 			-- Svelte
 			lspconfig.svelte.setup({
@@ -127,14 +139,11 @@ return {
 				capabilities = capabilities,
 				settings = {
 					["rust-analyzer"] = {
-						cargo = {
-							allFeatures = true,
-						},
-						diagnostics = {
-							enable = true,
-						},
-						flags = {
-							debounce_text_changes = 150,
+						cargo = { allFeatures = true },
+						checkOnSave = { command = "clippy" },
+						completion = {
+							autoimport = { enable = true },
+							postfix = { enable = true },
 						},
 					},
 				},
