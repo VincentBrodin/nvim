@@ -1,5 +1,9 @@
 return {
 	{
+		"slugbyte/lackluster.nvim",
+		priority = 1000,
+	},
+	{
 		"EdenEast/nightfox.nvim",
 		config = function()
 			require('nightfox').setup({
@@ -18,7 +22,6 @@ return {
 	},
 	{
 		"thesimonho/kanagawa-paper.nvim",
-		lazy = false,
 		priority = 1000,
 		opts = {},
 		config = function()
@@ -243,6 +246,10 @@ return {
 		"zenbones-theme/zenbones.nvim",
 		dependencies = "rktjmp/lush.nvim",
 		priority = 1000,
+		config = function()
+			vim.g.zenbones_colorize_diagnostic_underline_text = true
+			vim.g.zenbones_lighten_noncurrent_window = true
+		end
 	},
 	{
 		"folke/tokyonight.nvim",

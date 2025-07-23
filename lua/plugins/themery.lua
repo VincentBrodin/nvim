@@ -35,6 +35,11 @@ return {
 			"nordfox",
 			"terafox",
 			"carbonfox",
+			"lackluster",
+			"lackluster-hack",
+			"lackluster-mint",
+			"gruvbox",
+			"gruvbox-flat",
 		}
 
 		local themery_themes = {}

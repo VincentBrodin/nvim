@@ -58,7 +58,6 @@ return {
 				capabilities = capabilities,
 				settings = {
 					gopls = {
-						buildFlags = { "-tags=integration" },
 						usePlaceholders = true,
 						completeUnimported = true,
 						staticcheck = true,
@@ -140,7 +139,6 @@ return {
 				settings = {
 					["rust-analyzer"] = {
 						cargo = { allFeatures = true },
-						checkOnSave = { command = "clippy" },
 						completion = {
 							autoimport = { enable = true },
 							postfix = { enable = true },
