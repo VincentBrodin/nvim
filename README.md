@@ -11,8 +11,8 @@ This new configuration is my attempt to keep things **minimal yet powerful** jus
 
 ## Plugins Used
 - [eyeliner.nvim](https://github.com/jinh0/eyeliner.nvim) – Highlight and jump to characters easily.  
-- [oil.nvim](https://github.com/stevearc/oil.nvim) – A simple, modern file explorer.  
-- [autoclose.nvim](https://github.com/m4xshen/autoclose.nvim) – Auto-closing pairs for a smoother editing experience.  
+- [mini.files](https://github.com/echasnovski/mini.files) – A simple, modern file explorer.  
+- [mini.pairs](https://github.com/echasnovski/mini.pairs) – Auto-closing pairs for a smoother editing experience.  
 - [mini.pick](https://github.com/echasnovski/mini.pick) – Lightweight picker functionality.  
 - [mini.completion](https://github.com/echasnovski/mini.completion) – Minimal autocompletion.  
 - [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) – Easy setup for LSP servers.  

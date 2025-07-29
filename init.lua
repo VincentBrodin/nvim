@@ -1,4 +1,3 @@
-vim.o.number = true
 vim.o.relativenumber = true
 
 vim.o.shiftwidth = 4
@@ -23,8 +22,8 @@ vim.diagnostic.config({
 vim.pack.add({
 	{ src = "https://github.com/thesimonho/kanagawa-paper.nvim" }, -- Colorscheme
 	{ src = "https://github.com/jinh0/eyeliner.nvim" },          -- Quick string jumping
-	{ src = "https://github.com/stevearc/oil.nvim" },            -- FS
-	{ src = "https://github.com/m4xshen/autoclose.nvim" },       -- Simple autoclose
+	{ src = "https://github.com/echasnovski/mini.files" },       -- FS
+	{ src = "https://github.com/echasnovski/mini.pairs" },       -- Simple autoclose
 	{ src = "https://github.com/echasnovski/mini.pick" },        -- Grep and file search
 	{ src = "https://github.com/echasnovski/mini.completion" },  -- LPS completion
 	{ src = "https://github.com/neovim/nvim-lspconfig" },        -- LPS defualt configs
@@ -44,22 +43,32 @@ require "eyeliner".setup {
 	max_length = 9999,
 }
 
--- oil
-require "oil".setup {
-	delete_to_trash = true,
-	watch_for_changes = true,
-	win_options = {
-		signcolumn = "yes",
-	},
-	view_options = {
-		show_hidden = true,
+-- mini.files
+local mf = require "mini.files";
+mf.setup {
+	options = {
+		permanent_delete = false,
 	}
 }
-vim.keymap.set("n", "-", "<CMD>Oil<CR>")
+local mf_toggle = function(...)
+	if not mf.close() then
+		local bufname = vim.api.nvim_buf_get_name(0)
+		local path = bufname ~= "" and bufname or vim.fn.getcwd()
+		mf.open(path) -- makes sure that we open to the current file
+	end
+end
 
+vim.api.nvim_create_autocmd("User", {
+  pattern = "MiniFilesExplorerOpen",
+  callback = function()
+    mf.reveal_cwd()
+  end,
+})
 
--- autoclose
-require "autoclose".setup()
+vim.keymap.set("n", "-", mf_toggle);
+
+-- mini.pairs
+require "mini.pairs".setup()
 
 
 -- mini.pick
@@ -71,9 +80,6 @@ vim.keymap.set("n", "<leader>g", "<CMD>Pick grep<CR>")
 require "mini.completion".setup {
 	auto_setup = true,
 }
-vim.keymap.set('i', '<Tab>', function()
-	return vim.fn.pumvisible() == 1 and '<C-n>'
-end, { expr = true, noremap = true })
 
 -- mason
 require "mason".setup()
