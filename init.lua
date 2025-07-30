@@ -59,10 +59,10 @@ local mf_toggle = function(...)
 end
 
 vim.api.nvim_create_autocmd("User", {
-  pattern = "MiniFilesExplorerOpen",
-  callback = function()
-    mf.reveal_cwd()
-  end,
+	pattern = "MiniFilesExplorerOpen",
+	callback = function()
+		mf.reveal_cwd()
+	end,
 })
 
 vim.keymap.set("n", "-", mf_toggle);
@@ -78,8 +78,14 @@ vim.keymap.set("n", "<leader>g", "<CMD>Pick grep<CR>")
 
 -- mini.completion
 require "mini.completion".setup {
-	auto_setup = true,
+	lsp_completion = {
+		auto_setup = true,
+	},
 }
+
+vim.keymap.set('i', '<Tab>', function()
+	return vim.fn.pumvisible() == 1 and '<C-n>' or '<Tab>'
+end, { expr = true, noremap = true })
 
 -- mason
 require "mason".setup()
