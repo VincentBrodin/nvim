@@ -1,24 +1,38 @@
-vim.o.relativenumber = true
+local lsps = {
+	["lua-language-server"] = "lua_ls",
+	["clangd"] = "clangd",
+	["gopls"] = "gopls",
+}
 
-vim.o.shiftwidth = 4
-vim.o.tabstop = 4
+-- UI Settings
+vim.o.number = true         -- Show absolute line numbers
+vim.o.relativenumber = true -- Show relative line numbers
+vim.o.signcolumn = "yes"    -- Always show the sign column
+vim.o.wrap = false          -- Disable line wrapping
 
-vim.o.wrap = false
-vim.o.swapfile = false
+-- Indentation
+vim.o.shiftwidth = 4 -- Indent by 4 spaces
+vim.o.tabstop = 4    -- Tab character is 4 spaces
 
-vim.o.signcolumn = "yes"
+-- File Handling
+vim.o.swapfile = false -- Disable swap files
 
-vim.o.clipboard = "unnamedplus"
+-- Clipboard
+vim.o.clipboard = "unnamedplus" -- Use system clipboard
 
-vim.g.mapleader = " "
+-- Leader Key
+vim.g.mapleader = " " -- Set leader key to space
 
+-- Diagnostics
 vim.diagnostic.config({
-	virtual_text = true,
-	signs = true,
 	underline = true,
-	update_in_insert = false
+	virtual_text = true,
+	virtual_lines = false,
+	signs = true,
+	update_in_insert = false,
 })
 
+-- plugins
 vim.pack.add({
 	{ src = "https://github.com/thesimonho/kanagawa-paper.nvim" }, -- Colorscheme
 	{ src = "https://github.com/jinh0/eyeliner.nvim" },          -- Quick string jumping
@@ -28,6 +42,7 @@ vim.pack.add({
 	{ src = "https://github.com/echasnovski/mini.completion" },  -- LPS completion
 	{ src = "https://github.com/neovim/nvim-lspconfig" },        -- LPS defualt configs
 	{ src = "https://github.com/mason-org/mason.nvim" },         -- LPS install manager
+	{ src = "https://github.com/mason-org/mason-registry" },     -- For automatic lsp install
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter" }, -- Syntax highlighting
 })
 
@@ -48,7 +63,14 @@ local mf = require "mini.files";
 mf.setup {
 	options = {
 		permanent_delete = false,
-	}
+	},
+	mappings = {
+		close       = 'q',
+		go_in       = 'L',
+		go_in_plus  = 'l',
+		go_out      = 'H',
+		go_out_plus = 'h',
+	},
 }
 local mf_toggle = function(...)
 	if not mf.close() then
@@ -61,6 +83,7 @@ end
 vim.api.nvim_create_autocmd("User", {
 	pattern = "MiniFilesExplorerOpen",
 	callback = function()
+		mf.reset()
 		mf.reveal_cwd()
 	end,
 })
@@ -87,11 +110,25 @@ vim.keymap.set('i', '<Tab>', function()
 	return vim.fn.pumvisible() == 1 and '<C-n>' or '<Tab>'
 end, { expr = true, noremap = true })
 
--- mason
+-- mason & registry
 require "mason".setup()
+local registry = require "mason-registry"
+
+-- makes sure the all the lsps are installed
+local function ensure_installed(packages)
+	for _, pkg_name in ipairs(packages) do
+		local ok, pkg = pcall(registry.get_package, pkg_name)
+		if not ok then
+			vim.notify("Package not found: " .. pkg_name)
+		elseif not pkg:is_installed() then
+			pkg:install()
+		end
+	end
+end
+ensure_installed(vim.tbl_keys(lsps))
 
 -- lsp
-vim.lsp.enable({ "lua_ls", "clangd" })
+vim.lsp.enable(vim.tbl_values(lsps))
 vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function(ev)
 		local opts = { buffer = ev.buf }

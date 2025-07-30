@@ -1,20 +1,45 @@
 # Minimal Neovim Config
 
-My previous Neovim configuration became bloated, with multiple files and nested directories. It felt like I was drifting away from the simplicity that made me switch to nvim in the first place.
-
-This new configuration is my attempt to keep things **minimal yet powerful** just what I need, without unnecessary complexity.
+This is a single-file Neovim configuration that aims to stay minimal, fast, and functional. My previous config became too bloated — this is a clean reset that keeps only what I actually use.
 
 ## Goals
-- **Simplicity:** A single, clean, and easy-to-understand config.  
-- **Minimalism:** Use as few plugins as possible.  
-- **Full functionality:** No compromises on features I actually need.
 
-## Plugins Used
-- [eyeliner.nvim](https://github.com/jinh0/eyeliner.nvim) – Highlight and jump to characters easily.  
-- [mini.files](https://github.com/echasnovski/mini.files) – A simple, modern file explorer.  
-- [mini.pairs](https://github.com/echasnovski/mini.pairs) – Auto-closing pairs for a smoother editing experience.  
-- [mini.pick](https://github.com/echasnovski/mini.pick) – Lightweight picker functionality.  
-- [mini.completion](https://github.com/echasnovski/mini.completion) – Minimal autocompletion.  
-- [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) – Easy setup for LSP servers.  
-- [mason.nvim](https://github.com/williamboman/mason.nvim) – Manage LSP servers, DAPs, linters, and formatters.  
-- [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) – Syntax highlighting and parsing.
+* **Simplicity** – One clean, readable file
+* **Minimalism** – Few plugins, only essentials
+* **Functionality** – LSP, file navigation, search, completion, syntax
+
+## Plugins
+
+* [kanagawa-paper.nvim](https://github.com/thesimonho/kanagawa-paper.nvim) – Colorscheme
+* [eyeliner.nvim](https://github.com/jinh0/eyeliner.nvim) – Quick character-based jumps
+* [mini.files](https://github.com/echasnovski/mini.files) – File explorer
+* [mini.pairs](https://github.com/echasnovski/mini.pairs) – Auto-close pairs
+* [mini.pick](https://github.com/echasnovski/mini.pick) – File and grep search
+* [mini.completion](https://github.com/echasnovski/mini.completion) – LSP-based completion
+* [nvim-lspconfig](https://github.com/neovim/nvim-lspconfig) – LSP configuration
+* [mason.nvim](https://github.com/mason-org/mason.nvim) – LSP installer
+* [mason-registry](https://github.com/mason-org/mason-registry) – LSP metadata
+* [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) – Syntax highlighting
+
+## LSPs Used
+
+Installed and enabled automatically:
+
+* `lua_ls`
+* `clangd`
+* `gopls`
+
+## Keybindings
+
+* `-` — Toggle file explorer
+* `<leader>f` — Pick files
+* `<leader>g` — Grep
+* `K` — Hover
+* `gd` / `gD` — Go to definition / declaration
+* `<C-r><C-r>` — Rename
+* `<leader>ca` — Code action
+* `<leader>lf` — Format buffer
+
+## Requirements
+
+* **Neovim nightly** (0.10+) — uses `vim.pack.add()` and `vim.lsp.enable()`
