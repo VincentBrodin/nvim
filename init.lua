@@ -1,18 +1,13 @@
-local lsps = {
-	["lua-language-server"] = "lua_ls",
-	["clangd"] = "clangd",
-	["gopls"] = "gopls",
-}
-
 -- UI Settings
 vim.o.number = true         -- Show absolute line numbers
 vim.o.relativenumber = true -- Show relative line numbers
 vim.o.signcolumn = "yes"    -- Always show the sign column
 vim.o.wrap = false          -- Disable line wrapping
+vim.o.winborder = "rounded"
 
 -- Indentation
-vim.o.shiftwidth = 4 -- Indent by 4 spaces
-vim.o.tabstop = 4    -- Tab character is 4 spaces
+vim.o.shiftwidth = 2 -- Indent by 4 spaces
+vim.o.tabstop = 2    -- Tab character is 4 spaces
 
 -- File Handling
 vim.o.swapfile = false -- Disable swap files
@@ -35,20 +30,28 @@ vim.diagnostic.config({
 -- plugins
 vim.pack.add({
 	{ src = "https://github.com/thesimonho/kanagawa-paper.nvim" }, -- Colorscheme
-	{ src = "https://github.com/jinh0/eyeliner.nvim" },          -- Quick string jumping
-	{ src = "https://github.com/echasnovski/mini.files" },       -- FS
-	{ src = "https://github.com/echasnovski/mini.pairs" },       -- Simple autoclose
-	{ src = "https://github.com/echasnovski/mini.pick" },        -- Grep and file search
-	{ src = "https://github.com/echasnovski/mini.completion" },  -- LPS completion
-	{ src = "https://github.com/neovim/nvim-lspconfig" },        -- LPS defualt configs
-	{ src = "https://github.com/mason-org/mason.nvim" },         -- LPS install manager
-	{ src = "https://github.com/mason-org/mason-registry" },     -- For automatic lsp install
+	{ src = "https://github.com/jinh0/eyeliner.nvim" },            -- Quick string jumping
+	{ src = "https://github.com/echasnovski/mini.files" },         -- FS
+	{ src = "https://github.com/echasnovski/mini.pairs" },         -- Simple autoclose
+	{ src = "https://github.com/echasnovski/mini.pick" },          -- Grep and file search
+	{ src = "https://github.com/Saghen/blink.cmp" },               -- Completion
+	{ src = "https://github.com/mason-org/mason.nvim" },           -- LPS install manager
+	{ src = "https://github.com/neovim/nvim-lspconfig" },          -- LPS configs
 	{ src = "https://github.com/nvim-treesitter/nvim-treesitter" }, -- Syntax highlighting
 })
 
 -- colorscheme
 vim.cmd("set termguicolors")
 vim.cmd("set bg=dark")
+require "kanagawa-paper".setup {
+	dim_inactive = true,
+	styles = {
+		comment = { italic = true },
+		functions = { italic = false, bold = true },
+		keyword = { italic = false, bold = true },
+		statement = { italic = false, bold = true },
+		type = { italic = false, bold = true },
+	}, }
 vim.cmd("colorscheme kanagawa-paper")
 
 -- eyeliner
@@ -72,18 +75,15 @@ mf.setup {
 		go_out_plus = 'h',
 	},
 }
-local mf_toggle = function(...)
+local mf_toggle = function()
 	if not mf.close() then
-		local bufname = vim.api.nvim_buf_get_name(0)
-		local path = bufname ~= "" and bufname or vim.fn.getcwd()
-		mf.open(path) -- makes sure that we open to the current file
+		mf.open(vim.api.nvim_buf_get_name(0)) -- makes sure that we open to the current file
 	end
 end
 
 vim.api.nvim_create_autocmd("User", {
 	pattern = "MiniFilesExplorerOpen",
 	callback = function()
-		mf.reset()
 		mf.reveal_cwd()
 	end,
 })
@@ -98,13 +98,7 @@ require "mini.pairs".setup()
 require "mini.pick".setup()
 vim.keymap.set("n", "<leader>f", "<CMD>Pick files<CR>")
 vim.keymap.set("n", "<leader>g", "<CMD>Pick grep<CR>")
-
--- mini.completion
-require "mini.completion".setup {
-	lsp_completion = {
-		auto_setup = true,
-	},
-}
+vim.keymap.set("n", "<leader>h", "<CMD>Pick help<CR>")
 
 vim.keymap.set('i', '<Tab>', function()
 	return vim.fn.pumvisible() == 1 and '<C-n>' or '<Tab>'
@@ -112,23 +106,24 @@ end, { expr = true, noremap = true })
 
 -- mason & registry
 require "mason".setup()
-local registry = require "mason-registry"
-
--- makes sure the all the lsps are installed
-local function ensure_installed(packages)
-	for _, pkg_name in ipairs(packages) do
-		local ok, pkg = pcall(registry.get_package, pkg_name)
-		if not ok then
-			vim.notify("Package not found: " .. pkg_name)
-		elseif not pkg:is_installed() then
-			pkg:install()
-		end
-	end
-end
-ensure_installed(vim.tbl_keys(lsps))
 
 -- lsp
-vim.lsp.enable(vim.tbl_values(lsps))
+local lsps = {
+	"lua_ls",
+	"clangd",
+	"gopls",
+	"ts_ls"
+}
+vim.lsp.enable(lsps)
+vim.lsp.config("lua_ls", {
+	settings = {
+		Lua = {
+			workspace = {
+				library = vim.api.nvim_get_runtime_file("", true),
+			}
+		}
+	}
+})
 vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function(ev)
 		local opts = { buffer = ev.buf }
@@ -145,7 +140,34 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
+-- cmp
+require "blink.cmp".setup {
+	completion = {
+		menu = {
+			auto_show = true,
+		},
+		documentation = { auto_show = true },
+		ghost_text = { enabled = true },
+	},
+	fuzzy = {
+		implementation = 'prefer_rust_with_warning',
+	},
+	keymap = {
+		preset = 'enter',
+		["<Tab>"] = { "select_next", "snippet_forward", "fallback" },
+		["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" },
+		["<CR>"] = { "select_and_accept", "fallback" },
+	}
+}
+
 -- treesitter
 require "nvim-treesitter.configs".setup {
 	auto_install = true,
+	sync_install = false,
+	ignore_install = {},
+	ensure_installed = {},
+	modules = {},
+	highlight = {
+		enable = true,
+	},
 }
