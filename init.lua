@@ -6,11 +6,12 @@ vim.o.wrap = false          -- Disable line wrapping
 vim.o.winborder = "rounded"
 
 -- Indentation
-vim.o.shiftwidth = 2 -- Indent by 4 spaces
-vim.o.tabstop = 2    -- Tab character is 4 spaces
+vim.o.shiftwidth = 2 -- Indent by 2 spaces
+vim.o.tabstop = 2    -- Tab character is 2 spaces
 
 -- File Handling
 vim.o.swapfile = false -- Disable swap files
+vim.o.undofile = true
 
 -- Clipboard
 vim.o.clipboard = "unnamedplus" -- Use system clipboard
@@ -29,7 +30,7 @@ vim.diagnostic.config({
 
 -- plugins
 vim.pack.add({
-	{ src = "https://github.com/thesimonho/kanagawa-paper.nvim" }, -- Colorscheme
+	{ src = "https://github.com/rebelot/kanagawa.nvim" },          -- Colorscheme
 	{ src = "https://github.com/jinh0/eyeliner.nvim" },            -- Quick string jumping
 	{ src = "https://github.com/echasnovski/mini.files" },         -- FS
 	{ src = "https://github.com/echasnovski/mini.pairs" },         -- Simple autoclose
@@ -43,16 +44,27 @@ vim.pack.add({
 -- colorscheme
 vim.cmd("set termguicolors")
 vim.cmd("set bg=dark")
-require "kanagawa-paper".setup {
-	dim_inactive = true,
-	styles = {
-		comment = { italic = true },
-		functions = { italic = false, bold = true },
-		keyword = { italic = false, bold = true },
-		statement = { italic = false, bold = true },
-		type = { italic = false, bold = true },
-	}, }
-vim.cmd("colorscheme kanagawa-paper")
+require "kanagawa".setup {
+	commentStyle = { italic = true },
+	functionStyle = { bold = true, italic = false},
+	keywordStyle = { bold = true, italic = false},
+	statementStyle = { bold = true, italic = false },
+	typeStyle = { bold = true, italic = false },
+	background = {
+		dark = "wave",
+		light = "lotus"
+	},
+	colors = {
+		theme = {
+			all = {
+				ui = {
+					bg_gutter = "none"
+				}
+			}
+		}
+	},
+}
+vim.cmd("colorscheme kanagawa")
 
 -- eyeliner
 require "eyeliner".setup {
